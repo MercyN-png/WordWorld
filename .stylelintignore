@@ -1,0 +1,2 @@
+# Ignore all CSS files from linting - we use Tailwind CSS
+*.css
