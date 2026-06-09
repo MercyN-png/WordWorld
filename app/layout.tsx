@@ -8,6 +8,13 @@ const poppins = Poppins({ weight: ['400', '600', '800'], subsets: ['latin'], var
 export const metadata: Metadata = {
   title: 'WordWorld – Spark Your English',
   description: '5 idioms, 5 phrases, 5 vocab every day with fun animations',
+  metadataBase: new URL('https://wordworld.vercel.app'),
+  openGraph: {
+    title: 'WordWorld – Daily English Learning',
+    description: 'Learn 5 idioms, 5 phrases, and 5 new vocabulary words every day with animated characters',
+    type: 'website',
+    locale: 'en_US',
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

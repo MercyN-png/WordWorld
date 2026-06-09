@@ -2,7 +2,16 @@
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { motion } from 'framer-motion'
 
-export default function Navigation({ onBack, onNext, currentIndex, total, canGoBack, canGoNext }: any) {
+interface NavigationProps {
+  onBack: () => void
+  onNext: () => void
+  currentIndex: number
+  total: number
+  canGoBack: boolean
+  canGoNext: boolean
+}
+
+export default function Navigation({ onBack, onNext, currentIndex, total, canGoBack, canGoNext }: NavigationProps) {
   return (
     <div className="flex items-center justify-between max-w-sm mx-auto w-full gap-2">
       <motion.button

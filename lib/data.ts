@@ -42,10 +42,19 @@ function getDayNumber(): number {
 
 async function fetchWordFromAPI(word: string): Promise<Word | null> {
   try {
-    const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`)
-    if (!response.ok) return null
+    const controller = new AbortController()
+    const timeoutId = setTimeout(() => controller.abort(), 5000) // 5 second timeout
+    
+    const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`, {
+      signal: controller.signal
+    })
+    clearTimeout(timeoutId)
+    if (!response.ok) {
+      console.warn(`Dictionary API returned ${response.status} for word: ${word}`)
+      return null
+    }
 
-    const data = await response.json()
+    const data = await response.json() as Array<{ meanings?: Array<{ partOfSpeech?: string; definitions?: Array<{ definition?: string; example?: string }> }> }>
     const entry = data[0]
 
     if (!entry) return null
@@ -71,7 +80,13 @@ async function fetchWordFromAPI(word: string): Promise<Word | null> {
       difficulty,
     }
   } catch (error) {
-    console.error(`Failed to fetch ${word}:`, error)
+    if (error instanceof Error) {
+      if (error.name === 'AbortError') {
+        console.warn(`API request timeout for word: ${word}`)
+      } else {
+        console.error(`Failed to fetch ${word}:`, error.message)
+      }
+    }
     return null
   }
 }

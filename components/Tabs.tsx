@@ -1,7 +1,20 @@
 'use client'
 import { motion } from 'framer-motion'
 
-export default function Tabs({ tabs, onTabChange }: any) {
+interface Tab {
+  id: string
+  label: string
+  count: number
+  isActive: boolean
+  icon: React.ReactNode
+}
+
+interface TabsProps {
+  tabs: Tab[]
+  onTabChange: (id: string) => void
+}
+
+export default function Tabs({ tabs, onTabChange }: TabsProps) {
   return (
     <div className="flex justify-center gap-2 bg-white/30 p-1 rounded-xl backdrop-blur-md w-fit mx-auto shadow-inner">
       {tabs.map((tab: any) => (
