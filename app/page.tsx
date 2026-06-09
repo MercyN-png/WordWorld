@@ -53,7 +53,7 @@ export default function Home() {
           className="text-center"
         >
           <div className="text-5xl mb-4">📚</div>
-          <p className="text-gray-600 font-semibold">Loading today's words...</p>
+          <p className="text-gray-600 font-semibold">Loading today&apos;s words...</p>
         </motion.div>
       </main>
     )
@@ -115,7 +115,7 @@ export default function Home() {
         transition={{ repeat: Infinity, duration: 2 }}
         className="text-center text-gray-500 text-[10px] flex items-center justify-center gap-1 font-medium flex-shrink-0"
       >
-        ✨ Keep learning every day — you're amazing! ✨
+        ✨ Keep learning every day — you&apos;re amazing! ✨
       </motion.p>
     </main>
   )
